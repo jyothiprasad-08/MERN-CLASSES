@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let employees = [
+            { id: 101, name: "Kumari bhatula", role: "Developer", salary: 50000, image: "https://up.yimg.com/ib/th/id/OIP.ZnckYAUSumn_y3H73SbSkgHaEK?pid=Api&rs=1&c=1&qlt=95&w=185&h=104" },
+            { id: 102, name: "Revathi", role: "Designer", salary: 45000, image: "https://up.yimg.com/ib/th/id/OIP.uDs6_JXpNVbKuiUk9yDemwHaEo?pid=Api&rs=1&c=1&qlt=95&w=167&h=104" },
+            { id: 103, name: "Rani", role: "Tester", salary: 40000, image: "https://up.yimg.com/ib/th/id/OIP.i49iIxiolBN0ZBCJRHbDNgHaEJ?pid=Api&rs=1&c=1&qlt=95&w=214&h=119" },
+            { id: 104, name: "Teja", role: "Manager", salary: 80000, image: "https://up.yimg.com/ib/th/id/OIP.JQ54EzY4TdK2AeHGQ5WyLwHaEU?pid=Api&rs=1&c=1&qlt=95&w=213&h=124" }
+        ];
+
+        console.table(employees);
+
+        document.write("<table border='1' cellspacing='0' cellpadding='10'>");
+        document.write("<tr><th>Photo</th><th>ID</th><th>Name</th><th>Role</th><th>Salary</th></tr>");
+        
+        employees.map((emp) => {
+            document.write(`
+                <tr>
+                    <td><img src="${emp.image}" alt="${emp.name}'s Photo" style="border-radius: 5px; height: 50px; width: 50px;"></td>
+                    <td>${emp.id}</td>
+                    <td>${emp.name}</td>
+                    <td>${emp.role}</td>
+                    <td>${emp.salary}</td>
+                </tr>
+            `);
+        });
+
+        document.write("</table>");
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>h1::after{
+        content: " - class";
+        color: red;
+    }
+    label::after{
+        content: "#";
+        color: rgb(6, 183, 97);
+    }
+    h1::before{
+        content: "@ ";
+    }
+    label::before{
+        content: "* ";
+    }
+    label:last-of-type::before{
+        content: "#";
+        color: rgb(6, 183, 97);
+    }
+    h2::first-letter{
+        text-transform: uppercase;
+        color: blue;
+        font-size: 50px;
+        font-style: italic;
+        text-shadow: 2px 2px 5px red;
+        
+        }  p::first-line{
+            color: green;
+            font-size: 50px;
+            font-weight: bold;
+        } 
+        li:first-child::marker{
+            color: orange;
+            content: "👌";
+        }
+        li:nth-child(2)::marker{
+            color: purple;
+            content: "🦋";
+        }
+        li::marker{
+            color: cyan;
+        }
+        div::selection{
+            background-color: yellow;
+            color: red;
+        }p1::selection{
+            background-color: black;
+            color: white;
+        }
+        p::first-selection{
+            background-color: black;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>welcome to day-6</h1>
+    <form action="">
+        <fieldset>
+            <h2>Registration Form</h2>
+            <label for="">Name:</label>
+            <input type="text" id="name"  placeholder="Enter your name" name="name">
+            <br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email"  placeholder="Enter your email" name="email">
+            <br><br>
+            <button type="submit" style="color: brown; background-color: rgb(183, 152, 17);">submit</button>
+            <button type="reset" style="color: white; background-color: rgb(183, 17, 17);">reset</button>    
+        </fieldset>
+    </form>
+    <ol>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ol>
+    <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit consectetur adipisicing elit. Voluptas, voluptate. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.    tyjirweertoijyhoqj
+    </p>
+    <div>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis dolore necessitatibus perspiciatis deserunt architecto, minus quia nesciunt harum illo dolor cum sapiente maiores dolorum molestias quaerat voluptatum odio omnis explicabo.</p>
+
+    </div>
+    
+</body>
+</html>
