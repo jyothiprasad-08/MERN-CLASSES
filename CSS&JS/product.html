@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let productprice=[100,200,300,400,500];
+        console.log(productprice);
+         let productprices= productprice.map((price)=>{
+            return price-price/10;
+         });
+            console.log(productprices);
+            //filter discounted products 100 to 500rs prices
+
+            let filteredproducts =productprices.filter((price)=>{
+                return price>=100&& price<=500;
+            });
+            console.log(filteredproducts);
+            //total sum of mappedprices
+            let totalSum = productprices.reduce((sum, price) => {
+                return sum + price;
+            }, 0);
+            console.log(totalSum);
+    </script>
+    
+</body>
+</html>

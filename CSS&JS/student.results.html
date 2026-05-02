@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Result Table</title>
+  <style>
+    table {
+      border-collapse: collapse;
+       width: 100%;
+       }
+    th, td { border: 1px solid #333;
+       padding: 8px;
+        text-align: center;
+       }
+    th { background-color: #f2f2f2; }
+    .controls { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+    .controls div { display: flex; flex-direction: column; }
+    .controls input { padding: 5px; }
+    .search-box { margin-bottom: 15px; width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+    
+    /* Status Colors */
+    .green { 
+      background-color: green; 
+      color: #155724;
+    }
+    .yellow {
+       background-color:yellow;
+       color: #856404;
+    }
+    .orange {
+       background-color: orange;
+       color: #855004;
+    }
+    .red {
+       background-color: red;
+       color: #721c24;
+    }
+  </style>
+</head>
+<body>
+  <h2>Interactive Student Result Table</h2>
+
+  <div class="controls">
+    <div><label>Name</label><input type="text" id="addName"></div>
+    <div><label>Roll No</label><input type="text" id="addRoll"></div>
+    <div><label>CNN</label><input type="number" id="addCNN" style="width: 50px;"></div>
+    <div><label>CPP</label><input type="number" id="addCPP" style="width: 50px;"></div>
+    <div><label>ADE</label><input type="number" id="addADE" style="width: 50px;"></div>
+    <div><label>DSA</label><input type="number" id="addDSA" style="width: 50px;"></div>
+    <button onclick="addStudent()">Add Student</button>
+  </div>
+
+  <input type="text" id="searchInput" class="search-box" placeholder="Search by name or roll number..." onkeyup="renderTable()">
+
+  <table id="studentTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Roll No</th>
+        <th>CNN</th>
+        <th>CPP</th>
+        <th>ADE</th>
+        <th>DSA</th>
+        <th>Total</th>
+        <th>Percentage</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    let students = [
+      {name:'Akash', rollNo:'1', marks:{CNN:40, CPP:35, ADE:37, DSA:42}},
+      {name:'Ganesh', rollNo:'2', marks:{CNN:88, CPP:92, ADE:85, DSA:70}},
+      {name:'Arjun', rollNo:'3', marks:{CNN:45, CPP:55, ADE:60, DSA:60}},
+      {name:'Rajesh',rollNo:'4', marks:{CNN:75, CPP:82, ADE:70, DSA:88}},
+      {name:'Bhanu', rollNo:'5', marks:{CNN:62, CPP:65, ADE:75, DSA:70}},
+      {name:'Satya', rollNo:'6', marks:{CNN:95, CPP:89, ADE:92, DSA:98}},
+      {name:'Vidya', rollNo:'7', marks:{CNN:30, CPP:40, ADE:35, DSA:45}},
+      {name:'Hardhik', rollNo:'8', marks:{CNN:72, CPP:68, ADE:67, DSA:75}},
+      {name:'Poorna', rollNo:'9', marks:{CNN:85, CPP:88, ADE:90, DSA:82}},
+      {name:'Abhi', rollNo:'10', marks:{CNN:35, CPP:36, ADE:40, DSA:45}},
+      {name:'praveen kumar', rollNo:'11', marks:{CNN:90, CPP:95, ADE:92, DSA:88}},
+      {name:'Ramesh', rollNo:'12', marks:{CNN:65, CPP:70, ADE:75, DSA:67}},
+      {name:'Suresh', rollNo:'13', marks:{CNN:40, CPP:45, ADE:55, DSA:60}},
+      {name:'Karthik', rollNo:'14', marks:{CNN:70, CPP:85, ADE:67, DSA:72}},
+      {name:'Mani', rollNo:'15', marks:{CNN:88, CPP:90, ADE:85, DSA:92}},
+      {name:'Shiva', rollNo:'16', marks:{CNN:40, CPP:35, ADE:38, DSA:41}},
+      {name:'Geetha', rollNo:'17', marks:{CNN:95, CPP:92, ADE:96, DSA:90}},
+      {name:'Madhu', rollNo:'18', marks:{CNN:40, CPP:55, ADE:60, DSA:55}},
+      {name:'Giri', rollNo:'19', marks:{CNN:82, CPP:70, ADE:85, DSA:67}},
+      {name:'Bhavaniṣ', rollNo:'20', marks:{CNN:70, CPP:75, ADE:68, DSA:72}}
+    ];
+
+    function renderTable() {
+      const tbody = document.querySelector("#studentTable tbody");
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      tbody.innerHTML = "";
+
+      students.forEach((student, index) => {
+        // Filter logic
+        if (!student.name.toLowerCase().includes(searchTerm) && 
+            !student.rollNo.toString().includes(searchTerm)) {
+          return;
+        }
+
+        let total = student.marks.CNN + student.marks.CPP + student.marks.ADE + student.marks.DSA;
+        let percentage = (total / 400 * 100).toFixed(2);
+
+        let row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${student.name}</td>
+          <td>${student.rollNo}</td>
+          <td>${student.marks.CNN}</td>
+          <td>${student.marks.CPP}</td>
+          <td>${student.marks.ADE}</td>
+          <td>${student.marks.DSA}</td>
+          <td>${total}</td>
+          <td>${percentage}%</td>
+          <td>
+            <button onclick="editStudent(${index})">Edit</button>
+            <button onclick="deleteStudent(${index})">Delete</button>
+          </td>
+        `;
+
+        if (percentage >= 75) row.className = "green";
+        else if (percentage >= 55) row.className = "yellow";
+        else if (percentage >= 40) row.className = "orange";
+        else row.className = "red";
+
+        tbody.appendChild(row);
+      });
+    }
+
+    function addStudent() {
+      const name = document.getElementById('addName').value;
+      const rollNo = document.getElementById('addRoll').value;
+      const CNN = parseInt(document.getElementById('addCNN').value) || 0;
+      const CPP = parseInt(document.getElementById('addCPP').value) || 0;
+      const ADE = parseInt(document.getElementById('addADE').value) || 0;
+      const DSA = parseInt(document.getElementById('addDSA').value) || 0;
+
+      if (name && rollNo) {
+        students.push({ name, rollNo, marks: { CNN, CPP, ADE, DSA } });
+        renderTable();
+        // Clear inputs
+        document.querySelectorAll('.controls input').forEach(input => input.value = "");
+      } else {
+        alert("Please enter both Name and Roll No");
+      }
+    }
+
+    function editStudent(index) {
+      let student = students[index];
+      
+      const newName = prompt("Edit Name:", student.name);
+      if (newName === null) return; // Cancelled
+
+      const newCNN = prompt("Edit CNN Marks:", student.marks.CNN);
+      const newCPP = prompt("Edit CPP Marks:", student.marks.CPP);
+      const newADE = prompt("Edit ADE Marks:", student.marks.ADE);
+      const newDSA = prompt("Edit DSA Marks:", student.marks.DSA);
+
+      // Basic validation: update only if numeric values are provided
+      const parseMark = (val, current) => {
+        const parsed = parseInt(val);
+        return isNaN(parsed) ? current : parsed;
+      };
+
+      student.name = newName || student.name;
+      student.marks.CNN = parseMark(newCNN, student.marks.CNN);
+      student.marks.CPP = parseMark(newCPP, student.marks.CPP);
+      student.marks.ADE = parseMark(newADE, student.marks.ADE);
+      student.marks.DSA = parseMark(newDSA, student.marks.DSA);
+
+      renderTable();
+    }
+
+    function deleteStudent(index) {
+      students.splice(index, 1);
+      renderTable();
+    }
+
+    renderTable();
+  </script>
+</body>
+</html>
