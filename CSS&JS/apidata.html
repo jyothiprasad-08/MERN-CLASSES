@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            height: 100px;
+            width: 100px;
+            border-radius: 100%;
+
+        }
+        div{
+            margin:20px;
+            display: flex;
+            justify-content: space-evenly;
+            background-color: yellow;
+        }
+        div:nth-child(odd){
+            background-color: red;
+        }
+        div:nth-child(even){
+            background-color: green;
+        }
+        ol{
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let apiUrl = "https://api.github.com/users";
+
+        let body = document.querySelector("body");
+        //logic to fetch dumi api data 
+        fetch(apiUrl).then((res) => res.json()).then((users) => {
+            users.forEach((u) => {
+                console.log(u.login, u.id,u.user_view_type);
+                let div = document.createElement("div");
+                let image = document.createElement("img");
+                let orderList = document.createElement("ol");
+                let li1 = document.createElement("li");
+                let li2 = document.createElement("li");
+                let li3 = document.createElement("li");
+
+                div.appendChild(image)
+                div.appendChild(orderList)
+                orderList.appendChild(li1);
+                orderList.appendChild(li2);
+                orderList.appendChild(li3);
+                body.appendChild(div);
+
+                image.src = `${u.avatar_url}`
+
+                li1.innerText = `Username:${u.login}`
+                li2.innerText = `ID:${u.id}`
+                li3.innerHTML = `<span>Profile Type</span>:${u.user_view_type}`
+
+
+            });
+        }).catch((err) => {
+            console.log(err);
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+[
+    {
+        "name": "javafull stack",
+        "duration": "6 months",
+        "fees": 5000,
+        "topics": ["java", "spring", "hibernate", "angular", "react", "jdbc"],
+        "poster":""
+    }
+        {
+          "name": "javafull stack",
+        "duration": "6 months",
+        "fees": 5000,
+        "topics": ["java", "spring", "hibernate", "angular", "react", "jdbc"] 
+        }
+
+    
+]
